@@ -624,9 +624,9 @@ Let's do this for real now.
 
 In your lab machine environnement there is an application running in a docker container (tomcat server). Please issue the following command:
 ```
-root@crypt06:~# docker ps
+root@crypt04:~# docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
-a96459e351d6        s390x/tomcat:jre9   "catalina.sh run"   2 days ago          Up 2 days           0.0.0.0:8080->8080/tcp   upbeat_kare
+9df9d44cab08        s390x/tomcat:jre9   "catalina.sh run"   2 hours ago         Up 2 hours          0.0.0.0:8080->8080/tcp   unruffled_herschel
 ```
 
 You can also confirm that the application is running using a web-browser and checking the url:
@@ -637,23 +637,23 @@ http://<your_lab_machine_ip>:8080/
 
 Docker application and its data has been mounted in a volume group named vg01. This is the volume we will encryption without impacting running docker application. To assess the docker configuration on disk, please issue the following commands:
 ```
-root@crypt06:~# dmsetup status
-vg01-lv01: 0 20963328 linear 
+root@crypt04:~# dmsetup status
+vg01-lv01: 0 20963328 linear
 ```
 First of all, the volume group vg01 is not encrypted.
 
 ```
-root@crypt01:~# lsblk
+root@crypt04:~# lsblk
 NAME          MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 dasda          94:0    0  6.9G  0 disk 
-`-dasda1       94:1    0  6.9G  0 part /
+└─dasda1       94:1    0  6.9G  0 part /
 dasdb          94:4    0  1.4G  0 disk 
-`-dasdb1       94:5    0  1.4G  0 part [SWAP]
+└─dasdb1       94:5    0  1.4G  0 part [SWAP]
 dasdc          94:8    0   10G  0 disk 
-`-dasdc1       94:9    0   10G  0 part 
-  `-vg01-lv01 252:0    0   10G  0 lvm  /var/lib/docker
+└─dasdc1       94:9    0   10G  0 part 
 dasdd          94:12   0   10G  0 disk 
-`-dasdd1       94:13   0   10G  0 part
+└─dasdd1       94:13   0   10G  0 part 
+  └─vg01-lv01 253:0    0   10G  0 lvm  /var/lib/docker
 ```
 Second, /var/lib/docker is mounted on the volume group vg01.
 
@@ -663,48 +663,59 @@ LUKS adds metadata to the underlying block device, which contains information ab
 You can unlock the key slots by either providing a password on the command line or using a key file, which could, for example, be encrypted with gpg and stored on an NFS share.
 First of all, let's install cryptsetup, you can issue the following command:
 ```
-root@crypt06:~# sudo apt-get install cryptsetup
+root@crypt04:~# sudo apt-get install cryptsetup
 Reading package lists... Done
 Building dependency tree       
 Reading state information... Done
-cryptsetup is already the newest version (2:1.6.6-5ubuntu2.1).
-0 upgraded, 0 newly installed, 0 to remove and 106 not upgraded.
+The following additional packages will be installed:
+  cryptsetup-bin
+Suggested packages:
+  keyutils
+The following NEW packages will be installed
+  cryptsetup cryptsetup-bin
+0 to upgrade, 2 to newly install, 0 to remove and 0 not to upgrade.
+Need to get 238 kB of archives.
+After this operation, 842 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
 ```
+Press "y" when prompted.
 
 The dm-crypt feature supports various ciphers and hashing algorithms that you can select from the ones that are available in the Kernel and listed in the /proc/crypto procfs file. This also means that dm-crypt takes advantage of the unique hardware acceleration features of IBM Z that increase encryption and decryption speed.
 Using the cryptsetup command, create a LUKS partition on the respective disk devices. For full disk encryption, use the AES xts hardware feature. We choose the AES-xts to achieve a security level of reasonable quality with the best encryption mode.
 
 To confirm that is the best choice, you can issue the following command:
 ```
-[root@crypt06:~# cryptsetup benchmark
+root@crypt04:~# cryptsetup benchmark
 # Tests are approximate using memory only (no storage IO).
-PBKDF2-sha1       840205 iterations per second
-PBKDF2-sha256     491827 iterations per second
-PBKDF2-sha512     337379 iterations per second
-PBKDF2-ripemd160  599871 iterations per second
-PBKDF2-whirlpool  179796 iterations per second
-#  Algorithm | Key |  Encryption |  Decryption
-     aes-cbc   128b  2406.2 MiB/s  3821.1 MiB/s
- serpent-cbc   128b    75.6 MiB/s    89.4 MiB/s
- twofish-cbc   128b   147.0 MiB/s   175.2 MiB/s
-     aes-cbc   256b  2196.9 MiB/s  3655.5 MiB/s
- serpent-cbc   256b    75.9 MiB/s    86.1 MiB/s
- twofish-cbc   256b   146.5 MiB/s   169.3 MiB/s
-     aes-xts   256b  3330.6 MiB/s  3621.2 MiB/s
- serpent-xts   256b    75.8 MiB/s    85.5 MiB/s
- twofish-xts   256b   160.6 MiB/s   165.2 MiB/s
-     aes-xts   512b  3770.6 MiB/s  3537.9 MiB/s
- serpent-xts   512b    77.9 MiB/s    86.7 MiB/s
- twofish-xts   512b   163.0 MiB/s   165.0 MiB/s
+PBKDF2-sha1       846991 iterations per second for 256-bit key
+PBKDF2-sha256    1235071 iterations per second for 256-bit key
+PBKDF2-sha512     720175 iterations per second for 256-bit key
+PBKDF2-ripemd160  667033 iterations per second for 256-bit key
+PBKDF2-whirlpool  364595 iterations per second for 256-bit key
+argon2i       4 iterations, 498666 memory, 4 parallel threads (CPUs) for 256-bit key (requested 2000 ms time)
+argon2id      4 iterations, 475368 memory, 4 parallel threads (CPUs) for 256-bit key (requested 2000 ms time)
+#     Algorithm | Key |  Encryption |  Decryption
+        aes-cbc   128b  2162.4 MiB/s  2907.6 MiB/s
+    serpent-cbc   128b    65.2 MiB/s    70.5 MiB/s
+    twofish-cbc   128b   130.5 MiB/s   136.8 MiB/s
+        aes-cbc   256b  1774.1 MiB/s  2471.4 MiB/s
+    serpent-cbc   256b    57.9 MiB/s    62.9 MiB/s
+    twofish-cbc   256b   114.4 MiB/s   120.3 MiB/s
+        aes-xts   256b  2520.7 MiB/s  2772.3 MiB/s
+    serpent-xts   256b    70.5 MiB/s    75.0 MiB/s
+    twofish-xts   256b   157.1 MiB/s   146.6 MiB/s
+        aes-xts   512b  2776.7 MiB/s  2821.7 MiB/s # <-------- This is the best choice
+    serpent-xts   512b    71.8 MiB/s    74.5 MiB/s
+    twofish-xts   512b   158.9 MiB/s   149.1 MiB/s
 
 ```
 ### 2. Using dm-crypt Volumes as LVM Physical Volumes
 #### 2.1. Initial physical volume assessment
 ```
-root@crypt06:~# pvs
-  PV          VG   Fmt  Attr PSize  PFree 
-  /dev/dasdc1      lvm2 ---  10.00g 10.00g
-  /dev/dasdd1 vg01 lvm2 a--  10.00g     0
+root@crypt04:~# pvs
+  PV          VG   Fmt  Attr PSize   PFree 
+  /dev/dasdc1      lvm2 ---   10.00g 10.00g
+  /dev/dasdd1 vg01 lvm2 a--  <10.00g     0 
 ```
 
 **Note:** There is one physical volume which is not yet part of any volume group. This is the disk we'll use with cryptsetup.
@@ -712,39 +723,45 @@ In this example, this device is /dev/dasdc1. Yours may be different.
 
 #### 2.2. Initial volume group assessment
 ```
-root@crypt06:~# vgs
-  VG   #PV #LV #SN Attr   VSize  VFree
-  vg01   1   1   0 wz--n- 10.00g    0
+root@crypt04:~# vgs
+  VG   #PV #LV #SN Attr   VSize   VFree
+  vg01   1   1   0 wz--n- <10.00g    0 
 ```
 
 #### 2.3. Initial logical volume assessment
 ```
-root@crypt06:~# lvs
-  LV   VG   Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
-  lv01 vg01 -wi-ao---- 10.00g
+root@crypt04:~# lvs
+  LV   VG   Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  lv01 vg01 -wi-ao---- <10.00g 
 ```
 
 ### 3.1 Step 1 - Formatting and encrypting a new volume
 In the following step, we will format and encrypt an existing volume.
 ![Step1](https://github.com/guikarai/PE-LinuxONE/blob/master/images/step1.png)
-For the follwing, we will use a passphrase to generate an encryption key. Be sure to remember the entered passphrase. You can simply use "cryptlab" to make it simple. The following command will create a cryptographic device mapper device in LUKS encryption mode:
+For the following and to simplify the lab, we will use a passphrase to generate an encryption key. 
+
+Passphras is a mean, but there are others including:
+* gpgkey
+* protected key (using the pKEY tool)
+
+Be sure to remember the entered passphrase. You can simply use "cryptlab" to make it simple. The following command will create a cryptographic device mapper device in LUKS encryption mode:
 
 ```
-root@crypt06:~# cryptsetup luksFormat --hash=sha512 --key-size=512 --cipher=aes-xts-plain64 --verify-passphrase /dev/dasdc1
+root@crypt04:~# cryptsetup luksFormat --hash=sha512 --key-size=512 --cipher=aes-xts-plain64 --verify-passphrase /dev/dasdc1
 
 WARNING!
 ========
 This will overwrite data on /dev/dasdc1 irrevocably.
 
 Are you sure? (Type uppercase yes): YES
-Enter passphrase:  <--- cryptlab
-Verify passphrase: <--- cryptlab
+Enter passphrase for /dev/dasdc1: #<--- cryptlab OR your passphrase
+Verify passphrase:                #<--- cryptlab OR your passphrase
 ```
 
 Next, you have to open the volume onto the device mapper. This is the stage at which you will be prompted for your passphrase. You can choose the name that you want your partition mapped under. We proposed to you "dockercrypt".
 ```
-root@crypt06:~# cryptsetup luksOpen /dev/dasdc1 dockercrypt
-Enter passphrase for /dev/dasdc1: 
+root@crypt04:~# cryptsetup luksOpen /dev/dasdc1 dockercrypt
+Enter passphrase for /dev/dasdc1:     #<--- cryptlab OR your passphrase
 ```
 
 ### 3.2 Step 2 - Add dm-crypt based physical volume to volume group
@@ -757,34 +774,35 @@ root@crypt06:~# pvcreate /dev/mapper/dockercrypt 
   Physical volume "/dev/mapper/dockercrypt" successfully created.
 ```
 
-Now we will add in the volume group the new phisical device /dev/mapper/dockercrypt. Please issue the following command:
+Now we will add in the volume group the new physical device /dev/mapper/dockercrypt. Please issue the following command:
 ```
-root@crypt06:~# vgextend vg01 /dev/mapper/dockercrypt 
-  Volume group "vg01" successfully extended
+vgextend vg01 /dev/mapper/dockercrypt 
+  Volume group "vg01" successfully extended
 ```
 
 Let's check the new volume group status. As you can see, there is now 2 physical volume in the volume group.
 ```
-root@crypt06:~# vgs
-  VG    #PV #LV #SN Attr   VSize  VFree  
-  vg01   2   1   0 wz--n- 49.99g <25.00g
+root@crypt04:~# vgs
+  VG   #PV #LV #SN Attr   VSize  VFree  
+  vg01   2   1   0 wz--n- 19.99g <10.00g
 ```
 
 Checking physical volume, we can see that the encrypted new one is there aside from the initial one. Both part of the same volume group vg01.
 ```
-root@crypt06:~# pvs
-  PV                      VG    Fmt  Attr PSize   PFree  
-  /dev/mapper/dockercrypt vg01  lvm2 a--  10.00g  10.00g
-  /dev/dasdd1             vg01  lvm2 a--  10.00g      0 
+root@crypt04:~# pvs
+  PV                      VG   Fmt  Attr PSize   PFree  
+  /dev/dasdc1                  lvm2 ---   10.00g  10.00g
+  /dev/dasdd1             vg01 lvm2 a--  <10.00g      0 
+  /dev/mapper/dockercrypt vg01 lvm2 a--  <10.00g <10.00g
 ```
 
-You can use sudo dmsetup status to check if there are any LUKS-encrypted partitions. The output should look something like:
+You can use dmsetup status to check if there are any LUKS-encrypted partitions. The output should look something like:
 ```
-root@crypt06:~# dmsetup status
+root@crypt04:~# dmsetup status
 dockercrypt: 0 20967872 crypt 
-vg01-lv01: 0 20963328 linear 
+vg01-lv01: 0 20963328 linear
 ```
-The line marked "crypt" shows that sda5 has been encrypted. You can see which filesystems are on that via the lvm tools.
+The line marked "crypt" shows that PV has been encrypted. You can see which filesystems are on that via the lvm tools.
 
 
 ### 3.3 Step 3 - Migrate data from non encrypted volume to encrypted volume
@@ -793,35 +811,14 @@ In this third step, we will migrate unencrypted data in the uncrypted physical v
 
 Please issue to following command to proceede:
 ```
-root@crypt06:~# pvmove /dev/dasdd1 /dev/mapper/dockercrypt
-  /dev/dasdd1: Moved: 0.00%
-  /dev/dasdd1: Moved: 4.83%
-  /dev/dasdd1: Moved: 9.24%
-  /dev/dasdd1: Moved: 13.13%
-  /dev/dasdd1: Moved: 17.16%
-  /dev/dasdd1: Moved: 22.02%
-  /dev/dasdd1: Moved: 27.55%
-  /dev/dasdd1: Moved: 33.08%
-  /dev/dasdd1: Moved: 36.91%
-  /dev/dasdd1: Moved: 40.98%
-  /dev/dasdd1: Moved: 45.46%
-  /dev/dasdd1: Moved: 48.55%
-  /dev/dasdd1: Moved: 50.91%
-  /dev/dasdd1: Moved: 53.52%
-  /dev/dasdd1: Moved: 57.02%
-  /dev/dasdd1: Moved: 59.99%
-  /dev/dasdd1: Moved: 63.03%
-  /dev/dasdd1: Moved: 66.34%
-  /dev/dasdd1: Moved: 69.78%
-  /dev/dasdd1: Moved: 73.37%
-  /dev/dasdd1: Moved: 76.53%
-  /dev/dasdd1: Moved: 79.93%
-  /dev/dasdd1: Moved: 83.43%
-  /dev/dasdd1: Moved: 86.83%
-  /dev/dasdd1: Moved: 90.47%
-  /dev/dasdd1: Moved: 95.17%
-  /dev/dasdd1: Moved: 98.56%
-  /dev/dasdd1: Moved: 100.00%
+root@crypt04:~# pvmove /dev/dasdd1 /dev/mapper/dockercrypt
+  /dev/dasdd1: Moved: 0.04%
+  /dev/dasdd1: Moved: 18.87%
+  /dev/dasdd1: Moved: 37.55%
+  /dev/dasdd1: Moved: 56.00%
+  /dev/dasdd1: Moved: 75.07%
+  /dev/dasdd1: Moved: 93.32%
+  /dev/dasdd1: Moved: 100.00%
 ```
 
 ### 3.4 Step 4 - Remove unencrypted volume from the volume group
@@ -830,37 +827,37 @@ Fourth and last step. It is time to remove from the volume group, the volume tha
 
 Do do so, we will use the **vgreduce**. Please issue the following command:
 ```
-root@crypt06:~# vgreduce vg01 /dev/dasdd1
+root@crypt04:~# vgreduce vg01 /dev/dasdd1
   Removed "/dev/dasdd1" from volume group "vg01"
 ```
 
 Let's check the new configuration of LV, VG and PV: Please issue the following command:
 ```
-root@crypt06:~# lvs
-  LV   VG    Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
-  lv01 vg01  -wi-ao---- 10.00g                                                    
+root@crypt04:~# lvs
+  LV   VG   Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  lv01 vg01 -wi-ao---- <10.00g                                                    
 ```
 
 ```
-root@crypt06:~# vgs
-  VG   #PV #LV #SN Attr   VSize  VFree
-  vg01   1   1   0 wz--n- 10.00g    0
+root@crypt04:~# vgs
+  VG   #PV #LV #SN Attr   VSize   VFree
+  vg01   1   1   0 wz--n- <10.00g    0 
  
 ```
 
 ```
-root@crypt06:~# pvs
-  PV                      VG   Fmt  Attr PSize  PFree 
-  /dev/dasdc1                  lvm2 ---  10.00g 10.00g
-  /dev/dasdd1                  lvm2 ---  10.00g 10.00g
-  /dev/mapper/dockercrypt vg01 lvm2 a--  10.00g     0 
+root@crypt04:~# pvs
+  PV                      VG   Fmt  Attr PSize   PFree 
+  /dev/dasdc1                  lvm2 ---   10.00g 10.00g
+  /dev/dasdd1                  lvm2 ---   10.00g 10.00g
+  /dev/mapper/dockercrypt vg01 lvm2 a--  <10.00g     0 
 ```
 
 Now, application run 100% on a encrypted volume. Let's check if application is still running. Please issue the following command:
 ```
-root@crypt06:~# docker ps
+root@crypt04:~# docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                    NAMES
-a96459e351d6        s390x/tomcat:jre9   "catalina.sh run"   2 days ago          Up 2 days           0.0.0.0:8080->8080/tcp   upbeat_kare
+9df9d44cab08        s390x/tomcat:jre9   "catalina.sh run"   2 hours ago         Up 2 hours          0.0.0.0:8080->8080/tcp   unruffled_herschel
 ```
 
 You can also confirm that the application is running using a web-browser and checking the url:
@@ -872,23 +869,23 @@ If you see the following, you did it!
 
 To guaranty you that docker runs on the encrypted devices, please issue the following command:
 ```
-root@crypt06:~# lsblk
+root@crypt04:~# lsblk
 NAME            MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINT
 dasda            94:0    0  6.9G  0 disk  
-`-dasda1         94:1    0  6.9G  0 part  /
+└─dasda1         94:1    0  6.9G  0 part  /
 dasdb            94:4    0  1.4G  0 disk  
-`-dasdb1         94:5    0  1.4G  0 part  [SWAP]
+└─dasdb1         94:5    0  1.4G  0 part  [SWAP]
 dasdc            94:8    0   10G  0 disk  
-`-dasdc1         94:9    0   10G  0 part  
-  `-dockercrypt 252:1    0   10G  0 crypt 
-    `-vg01-lv01 252:0    0   10G  0 lvm   /var/lib/docker
+└─dasdc1         94:9    0   10G  0 part  
+  └─dockercrypt 253:1    0   10G  0 crypt 
+    └─vg01-lv01 253:0    0   10G  0 lvm   /var/lib/docker
 dasdd            94:12   0   10G  0 disk  
-`-dasdd1         94:13   0   10G  0 part  
+└─dasdd1         94:13   0   10G  0 part 
 ```
 
 To be sure that there is a prompt after after a reboot, please create /etc/crypttab with the following content:
 ```
-root@crypt06:~# vi /etc/crypttab
+root@crypt04:~# vi /etc/crypttab
 dockercrypt /dev/disk/by-path/ccw-0.0.0201-part1 none
 ```
 
