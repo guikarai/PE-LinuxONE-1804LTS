@@ -1,3 +1,4 @@
+![Image of IBM Systems University 2019](https://github.com/guikarai/PE-LinuxONE/blob/master/images/stgu.png)
 # Pervasive Encryption on Linux on IBM Z or LinuxONE Applied - Hands-on LABs
 
 Coming soon in IBM Systems Technical University
