@@ -8,10 +8,10 @@ Coming soon in IBM Systems Technical University
 # Purpose of this Hands-on LAB
 Pervasive Encryption has consumable capabilities available on Linux on IBM Z in order to protect both data-at-rest and data-in-motion. 
 In this hands-on lab, you will be guided in the following activities: 
-* environment preparation
-* crypto stack configuration
-* data at rest protection with a with dm-crypt volume encryption implementation
-* data in motion protection with OpenSSL tuning
+* Environment preparation
+* Crypto stack configuration
+* Data at rest protection with a with dm-crypt volume encryption implementation
+* Data in motion protection with OpenSSL tuning
 
 At the end of the hands-on lab, attendees will be able to quick start with pervasive encryption on Linux on IBM Z.
 
