@@ -1,8 +1,7 @@
-# Pervasive Encryption Applied - Hands-on LABs
+# Pervasive Encryption on Linux on IBM Z or LinuxONE Applied - Hands-on LABs
 
-Seen and used in IBM Systems Technical University
-* l101813 Thu 10:15-11:15 D6 Barsac
-* l101813 Thu 11:30-12:30 D6 Barsac  
+Coming soon in IBM Systems Technical University
+* Monday 15:30-16:30 Diamant-First Floor
 
 # About Pervasive Encryption on LinuxONE
 Pervasive encryption is a data-centric approach to information security that entails protecting data entering and exiting the z14 platform. It involves encrypting data in-flight and at-rest to meet complex compliance mandates and reduce the risks and financial losses of a data breach. It is a paradigm shift from selective encryption (where only the data that is required to achieve compliance is encrypted) to pervasive encryption. Pervasive encryption with z14 is enabled through tight platform integration that includes Linux on IBM Z or LinuxONE following features:
