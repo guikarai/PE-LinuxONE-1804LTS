@@ -5,6 +5,18 @@
 Coming soon in IBM Systems Technical University
 * Monday 15:30-16:30 Diamant-First Floor
 
+# Purpose of this Hands-on LAB
+Pervasive Encryption has consumable capabilities available on Linux on IBM Z in order to protect both data-at-rest and data-in-motion. 
+In this hands-on lab, you will be guided in the following activities: 
+* environment preparation
+* crypto stack configuration
+* data at rest protection with a with dm-crypt volume encryption implementation
+* data in motion protection with OpenSSL tuning
+
+At the end of the hands-on lab, attendees will be able to quick start with pervasive encryption on Linux on IBM Z.
+
+**Many thanks to:** Sylvain Carta, Guillaume Lasmayous, Eric Phan
+
 # About Pervasive Encryption on LinuxONE
 Pervasive encryption is a data-centric approach to information security that entails protecting data entering and exiting the z14 platform. It involves encrypting data in-flight and at-rest to meet complex compliance mandates and reduce the risks and financial losses of a data breach. It is a paradigm shift from selective encryption (where only the data that is required to achieve compliance is encrypted) to pervasive encryption. Pervasive encryption with z14 is enabled through tight platform integration that includes Linux on IBM Z or LinuxONE following features:
 * Integrated cryptographic hardware: Central Processor Assist for Cryptographic Function (CPACF) is a co-processor on every processor unit that accelerates encryption. Crypto Express features can be used as hardware security modules (HSMs).
