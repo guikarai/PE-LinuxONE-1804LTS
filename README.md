@@ -265,9 +265,9 @@ root@crypt04:~# openssl engine -c
 ```
 ### 2. Configuring OpenSSL
 To use the ibmca engine and to benefit from the Cryptographic hardware support, the configuration file of OpenSSL needs to be adjusted. To customize OpenSSL configuration to enable dynamic engine loading for ibmca, complete the following steps.
-#### 2.1. Locate the OpenSSL configuration file, which in our Ubuntu 16.04.3 LTS distribution is in this subdirectory: 
+#### 2.1. Locate the OpenSSL configuration file, which in our Ubuntu 18.04 LTS distribution is in this subdirectory: 
 ```
-root@crypt06:~# ls /usr/share/doc/openssl-ibmca/examples
+root@crypt04:~# ls /usr/share/doc/openssl-ibmca/examples
 ```
 
 #### 2.2. Make a backup copy of the configuration file
@@ -530,7 +530,7 @@ The scp command allows you to copy files over ssh connections. This is pretty us
 The scp command can be used in three* ways: to copy from a (remote) server to your computer, to copy from your computer to a (remote) server, and to copy from a (remote) server to another (remote) server. In the third case, the data is transferred directly between the servers; your own computer will only tell the servers what to do. These options are very useful for a lot of things that require files to be transferred
 Let's first clean the icastats monitoring. Please issue the following command:
 ```
-root@crypt06:~# icastats -r
+root@crypt04:~# icastats -r
 ```
 The previous command reset the icastats monitoring interface, and ease to interpret future result. 
 
@@ -783,13 +783,13 @@ In this second step, we will add the encrypted volume into the existing volume g
 
 Now we will use the device as phisical volume. Please issue the following command:
 ```
-root@crypt06:~# pvcreate /dev/mapper/dockercrypt 
+root@crypt04:~# pvcreate /dev/mapper/dockercrypt 
   Physical volume "/dev/mapper/dockercrypt" successfully created.
 ```
 
 Now we will add in the volume group the new physical device /dev/mapper/dockercrypt. Please issue the following command:
 ```
-vgextend vg01 /dev/mapper/dockercrypt 
+root@crypt04:~# vgextend vg01 /dev/mapper/dockercrypt 
   Volume group "vg01" successfully extended
 ```
 
