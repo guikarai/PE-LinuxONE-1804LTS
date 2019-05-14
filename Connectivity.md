@@ -28,10 +28,10 @@ Below, the details to connect the OpenVPN Package can be looked up in the table 
 | LABTEAM19 | zats_01062019_19  | cXcQbOYe_19 |
 | LABTEAM20 | zats_01062019_20  | cXcQbOYe_20 |
 
-Once connected to the VPN, the details to connect to the virtual machines can be looked up in the table below.
+Once connected to the VPN, the details to connect to the virtual machines can be looked up in the table below for PE labs:
 
-| **VM Name** | **Linux User** | **Linux Password** | **IP Address KRYPT** | **IP Address DPM** |
-|-------------|--------------|----------------|----------------|----------------|
+| **VM Name** | **Linux User** | **Linux Password** | **IP Address ** |
+|-------------|--------------|----------------|----------------|
 | LABTEAM01 | root | azerty11 | 10.3.4. | 10.7.17. |
 | LABTEAM02 | root | azerty11 | 10.3.4. | 10.7.17. |
 | LABTEAM03 | root | azerty11 | 10.3.4. | 10.7.17. |
@@ -52,3 +52,20 @@ Once connected to the VPN, the details to connect to the virtual machines can be
 | LABTEAM18 | root | azerty11 | 10.3.4. | 10.7.17. |
 | LABTEAM19 | root | azerty11 | 10.3.4. | 10.7.17. |
 | LABTEAM20 | root | azerty11 | 10.3.4. | 10.7.17. |
+
+Once connected to the VPN, the details to connect to the virtual machines can be looked up in the table below for DPM labs:
+
+| **VM Name** | **IP SuSE** | **IP Ubuntu zhmc CLI** |
+|-------------|--------------|----------------|----------------|----------------|
+| LABTEAM01 | 10.7.17.101 | 10.7.17.61 |
+| LABTEAM02 | 10.7.17.102 | 10.7.17.62 |
+| LABTEAM03 | 10.7.17.103 | 10.7.17.63 |
+| LABTEAM04 | 10.7.17.104 | 10.7.17.64 |
+| LABTEAM05 | 10.7.17.105 | 10.7.17.65 |
+| LABTEAM06 | 10.7.17.106 | 10.7.17.66 |
+| LABTEAM07 | 10.7.17.107 | 10.7.17.67 |
+| LABTEAM08 | 10.7.17.108 | 10.7.17.68 |
+| LABTEAM09 | 10.7.17.109 | 10.7.17.69 |
+| LABTEAM10 | 10.7.17.110 | 10.7.17.70 |
+| LABTEAM11 | 10.7.17.111 | 10.7.17.71 |
+| LABTEAM12 | 10.7.17.112 | 10.7.17.72 |
