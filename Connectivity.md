@@ -56,7 +56,7 @@ Once connected to the VPN, the details to connect to the virtual machines can be
 Once connected to the VPN, the details to connect to the virtual machines can be looked up in the table below for DPM labs:
 
 | **VM Name** | **IP SuSE** | **IP Ubuntu zhmc CLI** |
-|-------------|--------------|----------------|----------------|----------------|
+|-------------|--------------|----------------|
 | LABTEAM01 | 10.7.17.101 | 10.7.17.61 |
 | LABTEAM02 | 10.7.17.102 | 10.7.17.62 |
 | LABTEAM03 | 10.7.17.103 | 10.7.17.63 |
