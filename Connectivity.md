@@ -5,7 +5,7 @@ In order to reach the machine, you first need to install an OpenVPN client and c
 
 Below, the details to connect the OpenVPN Package can be looked up in the table below.
 
-| **VM Name** | **VPN User** | **VPN Password** |
+| **Team Name** | **VPN User** | **VPN Password** |
 |-------------|--------------|----------------|
 | LABTEAM01 | zats_01062019_01  | cXcQbOYe_01 |
 | LABTEAM02 | zats_01062019_02  | cXcQbOYe_02 |
@@ -30,7 +30,7 @@ Below, the details to connect the OpenVPN Package can be looked up in the table 
 
 Once connected to the VPN, the details to connect to the virtual machines can be looked up in the table below for PE labs:
 
-| **VM Name** | **Linux User** | **Linux Password** | **IP Address ** |
+| **Team Name** | **Linux User** | **Linux Password** | **IP Address ** |
 |-------------|--------------|----------------|----------------|
 | LABTEAM01 | root | azerty11 | 10.3.4. | 10.7.17. |
 | LABTEAM02 | root | azerty11 | 10.3.4. | 10.7.17. |
@@ -55,7 +55,7 @@ Once connected to the VPN, the details to connect to the virtual machines can be
 
 Once connected to the VPN, the details to connect to the virtual machines can be looked up in the table below for DPM labs:
 
-| **VM Name** | **IP SuSE** | **IP Ubuntu zhmc CLI** |
+| **Team Name** | **IP SuSE** | **IP Ubuntu zhmc CLI** |
 |-------------|--------------|----------------|
 | LABTEAM01 | 10.7.17.101 | 10.7.17.61 |
 | LABTEAM02 | 10.7.17.102 | 10.7.17.62 |
