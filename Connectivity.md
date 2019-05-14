@@ -29,6 +29,7 @@ Below, the details to connect the OpenVPN Package can be looked up in the table 
 | LABTEAM20 | zats_01062019_20  | cXcQbOYe_20 |
 
 Once connected to the VPN, the details to connect to the virtual machines can be looked up in the table below.
+
 | **VM Name** | **Linux User** | **Linux Password** | **IP Address** |
 |-------------|--------------|----------------|----------------|
 | LABTEAM01 | root | azerty11 | 10.3.57. |
