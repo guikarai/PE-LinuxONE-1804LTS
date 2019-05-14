@@ -30,25 +30,25 @@ Below, the details to connect the OpenVPN Package can be looked up in the table 
 
 Once connected to the VPN, the details to connect to the virtual machines can be looked up in the table below.
 
-| **VM Name** | **Linux User** | **Linux Password** | **IP Address** |
+| **VM Name** | **Linux User** | **Linux Password** | **IP Address KRYPT** | **IP Address DPM ** |
 |-------------|--------------|----------------|----------------|
-| LABTEAM01 | root | azerty11 | 10.3.57. |
-| LABTEAM02 | root | azerty11 | |
-| LABTEAM03 | root | azerty11 | |
-| LABTEAM04 | root | azerty11 | |
-| LABTEAM05 | root | azerty11 | |
-| LABTEAM06 | root | azerty11 | |
-| LABTEAM07 | root | azerty11 | |
-| LABTEAM08 | root | azerty11 | |
-| LABTEAM09 | root | azerty11 | |
-| LABTEAM10 | root | azerty11 | |
-| LABTEAM11 | root | azerty11 | |
-| LABTEAM12 | root | azerty11 | |
-| LABTEAM13 | root | azerty11 | |
-| LABTEAM14 | root | azerty11 | |
-| LABTEAM15 | root | azerty11 | |
-| LABTEAM16 | root | azerty11 | |
-| LABTEAM17 | root | azerty11 | |
-| LABTEAM18 | root | azerty11 | |
-| LABTEAM19 | root | azerty11 | |
-| LABTEAM20 | root | azerty11 | |
+| LABTEAM01 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM02 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM03 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM04 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM05 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM06 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM07 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM08 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM09 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM10 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM11 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM12 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM13 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM14 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM15 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM16 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM17 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM18 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM19 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM20 | root | azerty11 | 10.3.4. | 10.7.17. |
