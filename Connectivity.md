@@ -31,7 +31,7 @@ Below, the details to connect the OpenVPN Package can be looked up in the table 
 Once connected to the VPN, the details to connect to the virtual machines can be looked up in the table below.
 | **VM Name** | **Linux User** | **Linux Password** | **IP Address** |
 |-------------|--------------|----------------|----------------|
-| LABTEAM01 | root | azerty11 | |
+| LABTEAM01 | root | azerty11 | 10.3.57. |
 | LABTEAM02 | root | azerty11 | |
 | LABTEAM03 | root | azerty11 | |
 | LABTEAM04 | root | azerty11 | |
