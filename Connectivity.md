@@ -5,37 +5,25 @@ In order to reach the machine, you first need to install an OpenVPN client and c
 
 Once connected to the VPN, the details to connect to the virtual machines can be looked up in the table below.
 
-| **VM Name** | **Hostname** | **IP Address** |
-|-------------|--------------|----------------|
-| BLKCHN01 | blkchn01 | 10.3.4.158 |
-| BLKCHN02 | blkchn02 | 10.3.4.159 |
-| BLKCHN03 | blkchn03 | 10.3.4.160 |
-| BLKCHN04 | blkchn04 | 10.3.4.161 |
-| BLKCHN05 | blkchn05 | 10.3.4.162 |
-| BLKCHN06 | blkchn06 | 10.3.4.163 |
-| BLKCHN07 | blkchn07 | 10.3.4.164 |
-| BLKCHN08 | blkchn08 | 10.3.4.165 |
-| BLKCHN09 | blkchn09 | 10.3.4.166 |
-| BLKCHN10 | blkchn10 | 10.3.4.167 |
-| BLKCHN11 | blkchn11 | 10.3.4.168 |
-| BLKCHN12 | blkchn12 | 10.3.4.169 |
-| BLKCHN13 | blkchn13 | 10.3.4.170 |
-| BLKCHN14 | blkchn14 | 10.3.4.171 |
-| BLKCHN15 | blkchn15 | 10.3.4.172 |
-| BLKCHN16 | blkchn16 | 10.3.4.173 |
-| BLKCHN17 | blkchn17 | 10.3.4.174 |
-| BLKCHN18 | blkchn18 | 10.3.4.175 |
-| BLKCHN19 | blkchn19 | 10.3.4.176 |
-| BLKCHN20 | blkchn20 | 10.3.4.177 |
-| BLKCHN21 | blkchn21 | 10.3.4.178 |
-| BLKCHN22 | blkchn22 | 10.3.4.179 |
-| BLKCHN23 | blkchn23 | 10.3.4.180 |
-| BLKCHN24 | blkchn24 | 10.3.4.181 |
-| BLKCHN25 | blkchn25 | 10.3.4.182 |
-| BLKCHN26 | blkchn26 | 10.3.4.183 |
-| BLKCHN27 | blkchn27 | 10.3.4.184 |
-| BLKCHN28 | blkchn28 | 10.3.4.185 |
-| BLKCHN29 | blkchn29 | 10.3.4.186 |
-| BLKCHN30 | blkchn30 | 10.3.4.187 |
-| BLKCHN31 | blkchn31 | 10.3.4.188 |
-| BLKCHN32 | blkchn32 | 10.3.4.189 |
+| **VM Name** | **VPN User** | **VPN Password** | **IP Address** |
+|-------------|--------------|----------------|----------------|
+| BLKCHN01 | zats_01062019_01  | cXcQbOYe_01 |
+| BLKCHN02 | zats_01062019_02  | cXcQbOYe_02 |
+| BLKCHN03 | zats_01062019_03  | cXcQbOYe_03 |
+| BLKCHN04 | zats_01062019_04  | cXcQbOYe_04 |
+| BLKCHN05 | zats_01062019_05  | cXcQbOYe_05 |
+| BLKCHN06 | zats_01062019_06  | cXcQbOYe_06 |
+| BLKCHN07 | zats_01062019_07  | cXcQbOYe_07 |
+| BLKCHN08 | zats_01062019_08  | cXcQbOYe_08 |
+| BLKCHN09 | zats_01062019_09  | cXcQbOYe_09 |
+| BLKCHN10 | zats_01062019_10  | cXcQbOYe_10 |
+| BLKCHN11 | zats_01062019_11  | cXcQbOYe_11 |
+| BLKCHN12 | zats_01062019_12  | cXcQbOYe_12 |
+| BLKCHN13 | zats_01062019_13  | cXcQbOYe_13 |
+| BLKCHN14 | zats_01062019_14  | cXcQbOYe_14 |
+| BLKCHN15 | zats_01062019_15  | cXcQbOYe_15 |
+| BLKCHN16 | zats_01062019_16  | cXcQbOYe_16 |
+| BLKCHN17 | zats_01062019_17  | cXcQbOYe_17 |
+| BLKCHN18 | zats_01062019_18  | cXcQbOYe_18 |
+| BLKCHN19 | zats_01062019_19  | cXcQbOYe_19 |
+| BLKCHN20 | zats_01062019_20  | cXcQbOYe_20 |
