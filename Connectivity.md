@@ -32,26 +32,18 @@ Once connected to the VPN, the details to connect to the virtual machines can be
 
 | **Team Name** | **Linux User** | **Linux Password** | **IP Address ** |
 |-------------|--------------|----------------|----------------|
-| LABTEAM01 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM02 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM03 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM04 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM05 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM06 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM07 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM08 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM09 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM10 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM11 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM12 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM13 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM14 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM15 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM16 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM17 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM18 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM19 | root | azerty11 | 10.3.4. | 10.7.17. |
-| LABTEAM20 | root | azerty11 | 10.3.4. | 10.7.17. |
+| LABTEAM01 | root | azerty11 | 10.3.4.201 |
+| LABTEAM02 | root | azerty11 | 10.3.4.202 |
+| LABTEAM03 | root | azerty11 | 10.3.4.203 |
+| LABTEAM04 | root | azerty11 | 10.3.4.204 |
+| LABTEAM05 | root | azerty11 | 10.3.4.205 |
+| LABTEAM06 | root | azerty11 | 10.3.4.206 |
+| LABTEAM07 | root | azerty11 | 10.3.4.207 |
+| LABTEAM08 | root | azerty11 | 10.3.4.208 |
+| LABTEAM09 | root | azerty11 | 10.3.4.209 |
+| LABTEAM10 | root | azerty11 | 10.3.4.210 |
+| LABTEAM11 | root | azerty11 | 10.3.4.211 |
+| LABTEAM12 | root | azerty11 | 10.3.4.212 |
 
 Once connected to the VPN, the details to connect to the virtual machines can be looked up in the table below for DPM labs:
 
