@@ -6,27 +6,27 @@ Coming soon in IBM Systems Technical University
 * Monday 15:30-16:30 Diamant-First Floor
 
 # Purpose of this Hands-on LAB
-Pervasive Encryption has consumable capabilities available on Linux on IBM Z in order to protect both data-at-rest and data-in-motion. 
+Pervasive Encryption has consumable capabilities available on Linux on IBM Z or LinuxONE III in order to protect both data-at-rest and data-in-motion. 
 In this hands-on lab, you will be guided in the following activities: 
 * Environment preparation
 * Crypto stack configuration
 * Data at rest protection with a with dm-crypt volume encryption implementation
 * Data in motion protection with OpenSSL tuning
 
-At the end of the hands-on lab, attendees will be able to quick start with pervasive encryption on Linux on IBM Z.
+At the end of the hands-on lab, attendees will be able to quick start with pervasive encryption on LinuxONE III or Linux on IBM Z.
 
 **Many thanks to:** Sylvain Carta, Guillaume Lasmayous, Eric Phan
 
 # About Pervasive Encryption on LinuxONE
-Pervasive encryption is a data-centric approach to information security that entails protecting data entering and exiting the z14 platform. It involves encrypting data in-flight and at-rest to meet complex compliance mandates and reduce the risks and financial losses of a data breach. It is a paradigm shift from selective encryption (where only the data that is required to achieve compliance is encrypted) to pervasive encryption. Pervasive encryption with z14 is enabled through tight platform integration that includes Linux on IBM Z or LinuxONE following features:
+July 2017 was introduced the Pervasive Encryption. Pervasive encryption is a data-centric approach to information security that entails protecting data entering and exiting the IBM Z or LinuxONE III platform. It involves encrypting data in-flight and at-rest to meet complex compliance mandates and reduce the risks and financial losses of a data breach. It is a paradigm shift from selective encryption (where only the data that is required to achieve compliance is encrypted) to pervasive encryption. Pervasive encryption with IBM Z15 or LinuxONE III is enabled through tight platform integration that includes Linux on IBM Z or LinuxONE following features:
 * Integrated cryptographic hardware: Central Processor Assist for Cryptographic Function (CPACF) is a co-processor on every processor unit that accelerates encryption. Crypto Express features can be used as hardware security modules (HSMs).
 * Data set and file encryption: You can protect Linux file systems that is transparent to applications and databases.
 * Network encryption: You can protect network data traffic by using standards-based encryption from endpoint to endpoint.
 
-## LinuxONE Crypto Stack
-Pervasive Encryption benefits of the full Power of Linux Ecosystem plus z14 Capabilities
+## LinuxONE or Linux on IBM Z Crypto Stack
+Pervasive Encryption benefits of the full Power of Linux Ecosystem plus z15 Capabilities
 * LUKS dm-crypt – Transparent file & volume encryption using industry unique CPACF protected-keys
-* Network Security – Enterprise scale encryption and handshakes using z14 CPACF and SIMD (openSSL, IPSec...)
+* Network Security – Enterprise scale encryption and handshakes using z15 CPACF and SIMD (openSSL, IPSec...)
 
 The IBM Z and LinuxONE systems provide cryptographic functions that, from an application program perspective, can be grouped as follows:
 * Synchronous cryptographic functions, provided by the CP Assist for Cryptographic Function (CPACF) or the Crypto Express features when defined as an accelerator.
@@ -42,29 +42,28 @@ The IBM Z and LinuxONE systems provide also rich cryptographic functions availab
 A Linux on IBM Z user can easily check whether the Crypto Enablement feature is installed and which algorithms are supported in hardware. Hardware-acceleration for DES, TDES, AES, and GHASH requires CPACF. Issue the command shown below to discover whether the CPACF feature is enabled
 on your hardware.
 ```
-root@crypt04:~# cat /proc/cpuinfo
 vendor_id       : IBM/S390
 # processors    : 2
-bogomips per cpu: 21881.00
+bogomips per cpu: 24038.00
 max thread id   : 0
-features	: esan3 zarch stfle msa ldisp eimm dfp edat etf3eh highgprs te vx vxd vxe gs sie 
-facilities      : 0 1 2 3 4 6 7 8 9 10 12 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 30 31 32 33 34 35 36 37 38 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 57 58 59 60 73 74 75 76 77 80 81 82 128 129 130 131 133 134 135 146 147 168
+features	: esan3 zarch stfle msa ldisp eimm dfp edat etf3eh highgprs te vx vxd vxe gs vxe2 vxp sort dflt sie 
+facilities      : 0 1 2 3 4 6 7 8 9 10 12 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 30 31 32 33 34 35 36 37 38 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 57 58 59 60 61 73 74 75 76 77 80 81 82 128 129 130 131 133 134 135 146 147 148 150 151 152 155 156 168
 cache0          : level=1 type=Data scope=Private size=128K line_size=256 associativity=8
 cache1          : level=1 type=Instruction scope=Private size=128K line_size=256 associativity=8
 cache2          : level=2 type=Data scope=Private size=4096K line_size=256 associativity=8
-cache3          : level=2 type=Instruction scope=Private size=2048K line_size=256 associativity=8
-cache4          : level=3 type=Unified scope=Shared size=131072K line_size=256 associativity=32
-cache5          : level=4 type=Unified scope=Shared size=688128K line_size=256 associativity=42
-processor 0: version = FF,  identification = 233EF7,  machine = 3906
-processor 1: version = FF,  identification = 233EF7,  machine = 3906
+cache3          : level=2 type=Instruction scope=Private size=4096K line_size=256 associativity=8
+cache4          : level=3 type=Unified scope=Shared size=262144K line_size=256 associativity=32
+cache5          : level=4 type=Unified scope=Shared size=983040K line_size=256 associativity=60
+processor 0: version = FF,  identification = 1CD378,  machine = 8561
+processor 1: version = FF,  identification = 1CD378,  machine = 8561
 
 cpu number      : 0
-cpu MHz dynamic : 5208
-cpu MHz static  : 5208
+cpu MHz dynamic : 5200
+cpu MHz static  : 5200
 
 cpu number      : 1
-cpu MHz dynamic : 5208
-cpu MHz static  : 5208
+cpu MHz dynamic : 5200
+cpu MHz static  : 5200
 ```
 
 **Note**: msa on line 5, indicates that the CPACF instruction is properly supported and detected.
@@ -108,7 +107,7 @@ After the libica utility is installed, use the **icainfo** command to check on t
 The icainfo command displays which CPACF functions are supported by the implementation inside the libica library. Issue the following command to show which cryptographic algorithms will be hardware-accelerated by the libica driver, and which one will remain software-only implementations.
 
 ```
-root@crypt04:~# icainfo
+icainfo
       Cryptographic algorithm support      
 -------------------------------------------
  function      |  hardware  |  software  
@@ -241,7 +240,7 @@ Your hands-on LAB environment is now properly setup!
 
 ## Pervasive Encryption - Enabling OpenSSL and OpenSSH to use the hardware acceleration support
 
-This chapter describes how to use the cryptographic functions of the LinuxONE server to encrypt data in flight. This technique means that the data is encrypted and decrypted before and after it is transmitted. We will use OpenSSL, SCP and SFTP to demonstrate the encryption of data in flight. 
+This chapter describes how to use the cryptographic functions of the Linux on IBM Z or LinuxONE server to encrypt data in flight. This technique means that the data is encrypted and decrypted before and after it is transmitted. We will use OpenSSL, SCP and SFTP to demonstrate the encryption of data in flight. 
 This chapter also shows how to customize the product to use the LinuxONE hardware encryption features. This chapter includes the following sections:
 - Preparing to use openSSL
 - Configuring OpenSSL
@@ -249,7 +248,7 @@ This chapter also shows how to customize the product to use the LinuxONE hardwar
 - Testing Hardware Crypto functions with SCP
 
 ### 1. Preparing to use OpenSSL
-In the Linux system you use, OpenSSL is already installed, and the system is already enabled to use the cryptographic hardware of the LinuxONE server. We also loaded the cryptographic device drivers and the libica to use the crypto hardware. For the following steps, the following packages are required for encryption:
+In the Linux system you use, OpenSSL is already installed, and the system is already enabled to use the cryptographic hardware of the Linux on IBM Z or LinuxONE server. We also loaded the cryptographic device drivers and the libica to use the crypto hardware. For the following steps, the following packages are required for encryption:
 - openssl
 - openssl-libs
 - openssl-ibmca
